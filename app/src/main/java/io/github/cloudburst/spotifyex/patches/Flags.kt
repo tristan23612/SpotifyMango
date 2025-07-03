@@ -4,6 +4,7 @@ import android.util.Log
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
+import io.github.cloudburst.spotifyex.Module.TAG
 
 private val flagPatches = mapOf(
     "ads" to false,

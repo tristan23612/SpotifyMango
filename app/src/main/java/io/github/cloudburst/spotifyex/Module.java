@@ -11,12 +11,14 @@ import java.util.Date;
 import static io.github.cloudburst.spotifyex.patches.AccountKt.patchAccount;
 import static io.github.cloudburst.spotifyex.patches.ContextMenuKt.patchContextMenu;
 import static io.github.cloudburst.spotifyex.patches.HttpKt.blockRequests;
+import static io.github.cloudburst.spotifyex.patches.AnalyticsKt.patchIntegrity;
+import static io.github.cloudburst.spotifyex.patches.PopupKt.removePopups;
 import static io.github.cloudburst.spotifyex.patches.UrlsKt.cleanTrackingUrls;
 
 
 public final class Module implements IXposedHookLoadPackage {
 
-    private static final String TAG = "SpotifyEx";
+    public static final String TAG = "SpotifyEx";
 
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals("com.spotify.music")) return;
@@ -30,10 +32,12 @@ public final class Module implements IXposedHookLoadPackage {
                 Log.e(TAG, "Failed to create DexKitBridge");
                 return;
             }
+            try { patchIntegrity(bridge, cl); } catch (Exception e) { Log.e(TAG, "Failed to patch integrity", e); }
             //try { patchFlags(cl); } catch (Exception e) { Log.e(TAG, "Failed to patch flags", e); }
             try { blockRequests(cl); } catch (Exception e) { Log.e(TAG, "Failed to block requests", e); }
             //try { patchProduct(cl); } catch (Exception e) { Log.e(TAG, "Failed to patch product", e); }
             try { patchAccount(bridge, cl); } catch (Exception e) { Log.e(TAG, "Failed to patch account", e); }
+            try { removePopups(bridge, cl); } catch (Exception e) { Log.e(TAG, "Failed to remove popups", e); }
             try { patchContextMenu(bridge, cl); } catch (Exception e) { Log.e(TAG, "Failed to patch context menu", e); }
             try { cleanTrackingUrls(); } catch (Exception e) { Log.e(TAG, "Failed to clean tracking URLs", e); }
         } catch (Exception e) {

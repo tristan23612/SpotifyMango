@@ -1,39 +1,41 @@
 package io.github.cloudburst.spotifyex.patches
 
+import android.util.Log
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import org.luckypray.dexkit.DexKitBridge
+import io.github.cloudburst.spotifyex.Module.TAG
 
-val contextMenuMap = mapOf(
-    "hide_playlist_radio" to false,
-    "premium_upsell_panel_enabled" to false,
-    "remove_ads_upsell_enabled" to false,
-
-    "enable_premium_banner" to false,
-    "enable_contiguous_viewability_observer_for_in_stream_ads" to false,
-    "enable_contiguous_viewability_observer_for_on_surface_ads" to false,
-    "video_ads_caching_enabled" to false,
-)
 
 fun patchContextMenu(bridge: DexKitBridge, cl: ClassLoader) {
-    val booleanFlag = bridge.findClass {
+    val booleanFlags = bridge.findClass {
         matcher {
             usingStrings(
-                "gated-podcast-upsell-flow",
-                "DisableAllEnabledShows"
+                "hide_playlist_radio",
+                "premium_upsell_panel_enabled",
+                "remove_ads_upsell_enabled"
             )
         }
     }.findMethod {
         matcher {
             returnType = "boolean"
-            paramTypes("java.lang.String", "java.lang.String", "boolean")
         }
-    }.first()
+    }.filter {
+        it.getClass()?.getMethods()?.any { method ->
+            method.name == "equals"
+        } != true
+    }
 
-    XposedBridge.hookAllMethods(booleanFlag.getClassInstance(cl), booleanFlag.name, object : XC_MethodHook() {
-        override fun beforeHookedMethod(param: MethodHookParam) {
-            val override = contextMenuMap[param.args[1] as? String] ?: return
-            param.result = override
-        }
-    })
+    if (booleanFlags.isEmpty()) {
+        Log.w(TAG, "Failed to find boolean flags")
+        return
+    }
+
+    for (method in booleanFlags) {
+        XposedBridge.hookMethod(method.getMethodInstance(cl), object : XC_MethodHook() {
+            override fun beforeHookedMethod(param: MethodHookParam?) {
+                param?.result = false
+            }
+        })
+    }
 }

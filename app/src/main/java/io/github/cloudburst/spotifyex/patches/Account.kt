@@ -3,6 +3,7 @@ package io.github.cloudburst.spotifyex.patches
 import android.util.Log
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
+import io.github.cloudburst.spotifyex.Module.TAG
 import org.luckypray.dexkit.DexKitBridge
 import org.luckypray.dexkit.query.enums.StringMatchType
 import org.luckypray.dexkit.query.matchers.base.StringMatcher
@@ -12,6 +13,7 @@ private val flagPatches = mapOf<Any, Any>(
     "ads" to false,
     // Works along on-demand, allows playing any song without restriction.
     "player-license" to "premium",
+    "player-license-v2" to "premium",
     // Disables shuffle being initially enabled when first playing a playlist.
     "shuffle" to false,
     // Allows playing any song on-demand, without a shuffled order.
@@ -26,6 +28,9 @@ private val flagPatches = mapOf<Any, Any>(
     "streaming-rules" to "",
     // Enables premium UI in settings and removes the premium button in the nav-bar.
     "nft-disabled" to "1",
+    // Enable Spotify Connect and disable other premium related UI, like buying premium.
+    // It also removes the download button.
+    "type" to "premium",
     // Enable Spotify Car Thing hardware device.
     // Device is discontinued and no longer works with the latest releases,
     // but it might still work with older app targets.

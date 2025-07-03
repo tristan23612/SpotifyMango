@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "io.github.cloudburst.spotifyex"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "io.github.cloudburst.spotifyex"
@@ -44,8 +44,4 @@ android {
 dependencies {
     compileOnly("de.robv.android.xposed:api:82")
     implementation("org.luckypray:dexkit:2.0.0-rc7")
-
-    // AndroidX
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.browser:browser:1.6.0")
 }
