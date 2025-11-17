@@ -1,10 +1,10 @@
-package io.github.cloudburst.spotifyex.patches
+package io.github.tristan23612.spotifymango.patches
 
 import android.util.Log
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import org.luckypray.dexkit.DexKitBridge
-import io.github.cloudburst.spotifyex.Module.TAG
+import io.github.tristan23612.spotifymango.Module.TAG
 
 
 fun patchContextMenu(bridge: DexKitBridge, cl: ClassLoader) {

@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "io.github.cloudburst.spotifyex"
+    namespace = "io.github.tristan23612.spotifymango"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "io.github.cloudburst.spotifyex"
+        applicationId = "io.github.tristan23612.spotifymango"
         minSdk = 27
         targetSdk = 34
         versionCode = 1

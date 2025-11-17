@@ -1,4 +1,4 @@
-# SpotifyEx
+# SpotifyMango
 
 An Xposed module that improves the Spotify experience.
 

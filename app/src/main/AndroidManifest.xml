@@ -4,7 +4,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="SpotifyEx"
+        android:label="SpotifyMango"
         android:supportsRtl="true"
         android:multiArch="true"
         android:extractNativeLibs="false"

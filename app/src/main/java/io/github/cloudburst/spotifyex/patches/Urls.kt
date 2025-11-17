@@ -1,4 +1,4 @@
-package io.github.cloudburst.spotifyex.patches
+package io.github.tristan23612.spotifymango.patches
 
 import android.content.ClipData
 import android.net.Uri

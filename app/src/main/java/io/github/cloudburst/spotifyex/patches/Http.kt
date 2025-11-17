@@ -1,4 +1,4 @@
-package io.github.cloudburst.spotifyex.patches
+package io.github.tristan23612.spotifymango.patches
 
 import android.util.Log
 import de.robv.android.xposed.XC_MethodHook

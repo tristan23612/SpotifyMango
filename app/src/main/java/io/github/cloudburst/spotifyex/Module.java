@@ -1,4 +1,4 @@
-package io.github.cloudburst.spotifyex;
+package io.github.tristan23612.spotifymango;
 
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -8,17 +8,17 @@ import org.luckypray.dexkit.DexKitBridge;
 
 import java.util.Date;
 
-import static io.github.cloudburst.spotifyex.patches.AccountKt.patchAccount;
-import static io.github.cloudburst.spotifyex.patches.ContextMenuKt.patchContextMenu;
-import static io.github.cloudburst.spotifyex.patches.HttpKt.blockRequests;
-import static io.github.cloudburst.spotifyex.patches.AnalyticsKt.patchIntegrity;
-import static io.github.cloudburst.spotifyex.patches.PopupKt.removePopups;
-import static io.github.cloudburst.spotifyex.patches.UrlsKt.cleanTrackingUrls;
+import static io.github.tristan23612.spotifymango.patches.AccountKt.patchAccount;
+import static io.github.tristan23612.spotifymango.patches.ContextMenuKt.patchContextMenu;
+import static io.github.tristan23612.spotifymango.patches.HttpKt.blockRequests;
+import static io.github.tristan23612.spotifymango.patches.AnalyticsKt.patchIntegrity;
+import static io.github.tristan23612.spotifymango.patches.PopupKt.removePopups;
+import static io.github.tristan23612.spotifymango.patches.UrlsKt.cleanTrackingUrls;
 
 
 public final class Module implements IXposedHookLoadPackage {
 
-    public static final String TAG = "SpotifyEx";
+    public static final String TAG = "SpotifyMango";
 
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (!lpparam.packageName.equals("com.spotify.music")) return;
